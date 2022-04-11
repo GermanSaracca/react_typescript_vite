@@ -1,19 +1,20 @@
-import React, { useState, ChangeEvent } from "react";
+
+import { useForm } from "../hooks/useForm";
+
+interface FormData {
+  email: string;
+  name: string;
+  age: number;
+}
+
 
 const Form = () => {
-  const [formulario, setFormulario] = useState({
-    email: "",
-    name: "",
-  });
 
-  const handleInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = target;
-
-    setFormulario({
-      ...formulario,
-      [name]: value,
-    });
-  };
+  const {formulario, handleInputChange} = useForm<FormData>({
+    email: "gersara@temp.co",
+    name: "ger",
+    age: 32
+  })
 
   return (
     <form autoComplete="off">
@@ -25,6 +26,7 @@ const Form = () => {
           type="email"
           name="email"
           id="email"
+          value={formulario.email}
           className="form-control"
           onChange={handleInputChange}
         />
@@ -38,6 +40,7 @@ const Form = () => {
           type="name"
           name="name"
           id="name"
+          value={formulario.name}
           className="form-control"
           onChange={handleInputChange}
         />
